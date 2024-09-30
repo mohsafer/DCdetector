@@ -5,8 +5,8 @@ from torch.backends import cudnn
 from utils.utils import *
 from solver import Solver
 import time
-import warnings
-warnings.filterwarnings('ignore')
+#import warnings
+#warnings.filterwarnings('ignore')
 
 import sys
 
