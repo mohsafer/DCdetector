@@ -254,6 +254,10 @@ class Solver(object):
 
             metric = torch.softmax((-series_loss - prior_loss), dim=-1)
             cri = metric.detach().cpu().numpy()
+            if cri.size > 0:
+                 attens_energy.append(cri)
+            else:
+                 print("Warning: 'cri' is empty for batch", i)
             attens_energy.append(cri)
 
         attens_energy = np.concatenate(attens_energy, axis=0).reshape(-1)
