@@ -299,6 +299,7 @@ class Solver(object):
                         series[u].detach()) * temperature
             metric = torch.softmax((-series_loss - prior_loss), dim=-1)
             cri = metric.detach().cpu().numpy()
+            print("cri:", cri)
             if cri.size > 0:      #        # Ensure that cri has valid data before appending
                  attens_energy.append(cri)
             else:
