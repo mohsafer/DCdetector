@@ -1,5 +1,3 @@
-#TESTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
-
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -256,19 +254,9 @@ class Solver(object):
 
             metric = torch.softmax((-series_loss - prior_loss), dim=-1)
             cri = metric.detach().cpu().numpy()
-            if cri.size > 0:      #        # Ensure that cri has valid data before appending
-                 attens_energy.append(cri)
-            else:
-                 print("Warning: 'cri' is empty for batch", i)
             attens_energy.append(cri)
-        
-        if len(attens_energy) > 0:
-            attens_energy = np.concatenate(attens_energy, axis=0).reshape(-1)
-            print("Concatenation successful!")
-        else:
-            print("Error: attens_energy is empty. Cannot concatenate.")
-  
 
+        attens_energy = np.concatenate(attens_energy, axis=0).reshape(-1)
         test_energy = np.array(attens_energy)
         combined_energy = np.concatenate([train_energy, test_energy], axis=0)
         thresh = np.percentile(combined_energy, 100 - self.anormly_ratio)
@@ -301,22 +289,10 @@ class Solver(object):
                         series[u].detach()) * temperature
             metric = torch.softmax((-series_loss - prior_loss), dim=-1)
             cri = metric.detach().cpu().numpy()
-            print("cri:", cri)
-            if cri.size > 0:      #        # Ensure that cri has valid data before appending
-                 attens_energy.append(cri)
-            else:
-                 print("Warning: 'cri' is empty for batch", i)
             attens_energy.append(cri)
             test_labels.append(labels)
-
-        if len(attens_energy) > 0:
-            #print("atten list:" attens_energy)
-            attens_energy = np.concatenate(attens_energy, axis=0).reshape(-1)
-            #print("Concatenation successful!")
-        else:
-            print("Error: attens_energy is empty. Cannot concatenate.")
-
-      #  attens_energy = np.concatenate(attens_energy, axis=0).reshape(-1)
+            
+        attens_energy = np.concatenate(attens_energy, axis=0).reshape(-1)
         test_labels = np.concatenate(test_labels, axis=0).reshape(-1)
         test_energy = np.array(attens_energy)
         test_labels = np.array(test_labels)
