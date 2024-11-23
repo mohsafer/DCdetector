@@ -310,9 +310,9 @@ class Solver(object):
             test_labels.append(labels)
 
         if len(attens_energy) > 0:
-            print("atten list:" attens_energy)
+            #print("atten list:" attens_energy)
             attens_energy = np.concatenate(attens_energy, axis=0).reshape(-1)
-            print("Concatenation successful!")
+            #print("Concatenation successful!")
         else:
             print("Error: attens_energy is empty. Cannot concatenate.")
 
