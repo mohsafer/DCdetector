@@ -169,7 +169,7 @@ class Solver(object):
                 prior_loss = prior_loss / len(prior)
 
                 loss = prior_loss - series_loss 
-                writer.add_scalar("Loss/train", loss, epoch)
+                #writer.add_scalar("Loss/train", loss, epoch * len(trainloader) + i)
                 if (i + 1) % 100 == 0:
                     speed = (time.time() - time_now) / iter_count
                     left_time = speed * ((self.num_epochs - epoch) * train_steps - i)
@@ -182,7 +182,7 @@ class Solver(object):
 
             vali_loss1, vali_loss2 = self.vali(self.test_loader)
             # TWESTTETSTTETETSTTTSTTETETTETTETETETTEETETETETETTETEETETETETETETTETETETETETETETETETTETE
-            writer.add_scalar("Loss/train", loss, self.num_epochs)
+            writer.add_scalar("Loss/train", loss, epoch * len(trainloader) + i)
             print(
                 "Epoch: {0}, Cost time: {1:.3f}s ".format(
                     epoch + 1, time.time() - epoch_time))
