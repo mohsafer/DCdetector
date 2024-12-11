@@ -13,7 +13,7 @@ from metrics.metrics import *
 import warnings
 warnings.filterwarnings('ignore')
 
-writer = SummaryWriter("test_epoch5")
+writer = SummaryWriter()
 
 def my_kl_loss(p, q):
     res = p * (torch.log(p + 0.0001) - torch.log(q + 0.0001))
