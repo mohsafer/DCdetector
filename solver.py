@@ -13,7 +13,7 @@ from metrics.metrics import *
 import warnings
 warnings.filterwarnings('ignore')
 
-writer = SummaryWriter()
+writer = SummaryWriter("test_epoch5")
 
 def my_kl_loss(p, q):
     res = p * (torch.log(p + 0.0001) - torch.log(q + 0.0001))
@@ -181,8 +181,8 @@ class Solver(object):
                 self.optimizer.step()
 
             vali_loss1, vali_loss2 = self.vali(self.test_loader)
-# TEST for Tensorboard 
-            writer.add_scalar("Loss/train", loss, epoch)
+            # TEST for Tensorboard 
+            writer.add_scalar("Loss/train", loss, num_epochs)
             print(
                 "Epoch: {0}, Cost time: {1:.3f}s ".format(
                     epoch + 1, time.time() - epoch_time))
@@ -191,7 +191,7 @@ class Solver(object):
                 break
             adjust_learning_rate(self.optimizer, epoch + 1, self.lr)
             
-            writer.flush()
+            #writer.flush()
             writer.close()
     def test(self):
         self.model.load_state_dict(
