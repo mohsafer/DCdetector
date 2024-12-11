@@ -185,8 +185,8 @@ class Solver(object):
                 #writer.add_scalar("Loss/train", loss, epoch)##################################################################################
                 #running_loss += loss.item()
                 #writer.add_scalar("Loss/train", loss.item(), epoch * len(self.train_loader) + i)
-                writer.add_scalar('training loss', running_loss.item() , epoch * len(self.train_loader) + i)
-                print('epoch {}, loss {}'.format(epoch * len(self.train_loader) + i, prior_loss.item()))
+                writer.add_scalar('training loss', loss.item() , epoch * len(self.train_loader) + i)
+                print('epoch {}, loss_perior {}, loss_series {}'.format(epoch * len(self.train_loader) + i, prior_loss.item(), series_loss.item()))
                 
             vali_loss1, vali_loss2 = self.vali(self.test_loader)
        
