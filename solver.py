@@ -186,6 +186,7 @@ class Solver(object):
                 #running_loss += loss.item()
                 #writer.add_scalar("Loss/train", loss.item(), epoch * len(self.train_loader) + i)
                 writer.add_scalar('training loss', running_loss / 1000, epoch * len(self.train_loader) + i)
+                print('epoch {}, loss {}'.format(epoch, loss.item()))
                 running_loss = 0.0
             vali_loss1, vali_loss2 = self.vali(self.test_loader)
        
