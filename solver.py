@@ -181,7 +181,7 @@ class Solver(object):
                 self.optimizer.step()
 
             vali_loss1, vali_loss2 = self.vali(self.test_loader)
-            # TESTTETSTTETETSTTTSTTETETTETTETETETTEETETETETETTETEETETETETETETTETETETETETETETETETTETE
+            # TWESTTETSTTETETSTTTSTTETETTETTETETETTEETETETETETTETEETETETETETETTETETETETETETETETETTETE
             writer.add_scalar("Loss/train", loss, self.num_epochs)
             print(
                 "Epoch: {0}, Cost time: {1:.3f}s ".format(
