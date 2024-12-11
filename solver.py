@@ -182,7 +182,7 @@ class Solver(object):
 
             vali_loss1, vali_loss2 = self.vali(self.test_loader)
             # TWESTTETSTTETETSTTTSTTETETTETTETETETTEETETETETETTETEETETETETETETTETETETETETETETETETTETE
-            writer.add_scalar("Loss/train", loss, epoch)
+            writer.add_scalar("Loss/train", loss, epoch * len(self.train_loader) + i)
             print(
                 "Epoch: {0}, Cost time: {1:.3f}s ".format(
                     epoch + 1, time.time() - epoch_time))
