@@ -171,7 +171,7 @@ class Solver(object):
                 loss = prior_loss - series_loss 
 
                 running_loss += loss.item()
-                writer.add_scalar("Loss/train", running_loss, epoch * len(self.train_loader) + i)
+                writer.add_scalar("Loss/train", running_los / 100, epoch * len(self.train_loader) + i)
                # writer.add_scalar("Loss/train", loss.item(), epoch)
              
                 if (i + 1) % 100 == 0:
