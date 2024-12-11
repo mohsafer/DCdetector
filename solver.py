@@ -169,6 +169,7 @@ class Solver(object):
                 prior_loss = prior_loss / len(prior)
 
                 loss = prior_loss - series_loss 
+                writer.add_scalar("Loss/train", loss.item(), epoch * len(self.train_loader) + i)
                 #writer.add_scalar("Loss/train", loss, epoch * len(trainloader) + i)
                 if (i + 1) % 100 == 0:
                     speed = (time.time() - time_now) / iter_count
@@ -182,7 +183,7 @@ class Solver(object):
 
             vali_loss1, vali_loss2 = self.vali(self.test_loader)
             # TWESTTETSTTETETSTTTSTTETETTETTETETETTEETETETETETTETEETETETETETETTETETETETETETETETETTETE
-            writer.add_scalar("Loss/train", loss, epoch * len(self.train_loader) + i)
+            #writer.add_scalar("Loss/train", loss, epoch * len(self.train_loader) + i)
             print(
                 "Epoch: {0}, Cost time: {1:.3f}s ".format(
                     epoch + 1, time.time() - epoch_time))
@@ -192,7 +193,7 @@ class Solver(object):
             adjust_learning_rate(self.optimizer, epoch + 1, self.lr)
             
             #writer.flush()
-            writer.close()
+            
     def test(self):
         self.model.load_state_dict(
             torch.load(

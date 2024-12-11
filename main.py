@@ -50,6 +50,8 @@ def main(config):
         solver.train()
     elif config.mode == 'test':
         solver.test()
+    
+    writer.close()
 
     return solver
 
