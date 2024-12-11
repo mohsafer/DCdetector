@@ -169,7 +169,7 @@ class Solver(object):
                 prior_loss = prior_loss / len(prior)
 
                 loss = prior_loss - series_loss 
-
+                writer.add_scalar("Loss/train", loss, epoch)
                 if (i + 1) % 100 == 0:
                     speed = (time.time() - time_now) / iter_count
                     left_time = speed * ((self.num_epochs - epoch) * train_steps - i)
@@ -181,7 +181,8 @@ class Solver(object):
                 self.optimizer.step()
 
             vali_loss1, vali_loss2 = self.vali(self.test_loader)
-
+# TEST for Tensorboard 
+            
             print(
                 "Epoch: {0}, Cost time: {1:.3f}s ".format(
                     epoch + 1, time.time() - epoch_time))
@@ -189,10 +190,9 @@ class Solver(object):
             if early_stopping.early_stop:
                 break
             adjust_learning_rate(self.optimizer, epoch + 1, self.lr)
-            # TEST for Tensorboard 
-            writer.add_scalar("Loss/train", loss, epoch)
-        writer.flush()
-        writer.close()
+            
+            #writer.flush()
+        #writer.close()
     def test(self):
         self.model.load_state_dict(
             torch.load(
