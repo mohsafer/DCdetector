@@ -169,7 +169,7 @@ class Solver(object):
                 prior_loss = prior_loss / len(prior)
 
                 loss = prior_loss - series_loss 
-
+                running_loss += loss.item()
                 
                
              
@@ -184,8 +184,9 @@ class Solver(object):
                 self.optimizer.step()
                 #writer.add_scalar("Loss/train", loss, epoch)##################################################################################
                 #running_loss += loss.item()
-                writer.add_scalar("Loss/train", loss.item(), epoch * len(self.train_loader) + i)
-
+                #writer.add_scalar("Loss/train", loss.item(), epoch * len(self.train_loader) + i)
+                writer.add_scalar('training loss', running_loss / 1000, epoch * len(trainloader) + i)
+                running_loss = 0.0
             vali_loss1, vali_loss2 = self.vali(self.test_loader)
        
             print(
