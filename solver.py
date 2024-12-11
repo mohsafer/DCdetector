@@ -191,8 +191,8 @@ class Solver(object):
                 break
             adjust_learning_rate(self.optimizer, epoch + 1, self.lr)
             
-            #writer.flush()
-        #writer.close()
+            writer.flush()
+            writer.close()
     def test(self):
         self.model.load_state_dict(
             torch.load(
