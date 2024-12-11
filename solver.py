@@ -13,7 +13,7 @@ from metrics.metrics import *
 import warnings
 warnings.filterwarnings('ignore')
 
-
+writer = SummaryWriter()
 
 def my_kl_loss(p, q):
     res = p * (torch.log(p + 0.0001) - torch.log(q + 0.0001))
@@ -64,7 +64,7 @@ class EarlyStopping:
         
 class Solver(object):
     DEFAULTS = {}
-    writer = SummaryWriter()
+    
     def __init__(self, config):
 
         self.__dict__.update(Solver.DEFAULTS, **config)
