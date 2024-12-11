@@ -1,4 +1,5 @@
 import torch
+from torch.utils.tensorboard import SummaryWriter
 import torch.nn as nn
 import torch.nn.functional as F
 import numpy as np
@@ -11,6 +12,8 @@ from einops import rearrange
 from metrics.metrics import *
 import warnings
 warnings.filterwarnings('ignore')
+
+writer = SummaryWriter()
 
 def my_kl_loss(p, q):
     res = p * (torch.log(p + 0.0001) - torch.log(q + 0.0001))
@@ -186,8 +189,10 @@ class Solver(object):
             if early_stopping.early_stop:
                 break
             adjust_learning_rate(self.optimizer, epoch + 1, self.lr)
-
-            
+            # TEST for Tensorboard 
+            writer.add_scalar("Loss/train", loss, epoch)
+        writer.flush()
+        writer.close()
     def test(self):
         self.model.load_state_dict(
             torch.load(
