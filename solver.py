@@ -169,7 +169,8 @@ class Solver(object):
                 prior_loss = prior_loss / len(prior)
 
                 loss = prior_loss - series_loss 
-                writer.add_scalar("Loss/train", loss.item(), epoch * len(self.train_loader) + i)
+                #writer.add_scalar("Loss/train", loss.item(), epoch * len(self.train_loader) + i)
+                writer.add_scalar("Loss/train", loss.item(), epoch)
                 #writer.add_scalar("Loss/train", loss, epoch * len(trainloader) + i)
                 if (i + 1) % 100 == 0:
                     speed = (time.time() - time_now) / iter_count
