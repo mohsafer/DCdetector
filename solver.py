@@ -134,7 +134,7 @@ class Solver(object):
             os.makedirs(path)
         early_stopping = EarlyStopping(patience=5, verbose=True, dataset_name=self.data_path)
         train_steps = len(self.train_loader)
-
+        running_loss = 0.0
         for epoch in range(self.num_epochs):
             iter_count = 0
 
@@ -169,6 +169,8 @@ class Solver(object):
                 prior_loss = prior_loss / len(prior)
 
                 loss = prior_loss - series_loss 
+
+                running_loss += loss.item()
                 #writer.add_scalar("Loss/train", loss.item(), epoch * len(self.train_loader) + i)
                 writer.add_scalar("Loss/train", loss.item(), epoch)
                 #writer.add_scalar("Loss/train", loss, epoch * len(trainloader) + i)
