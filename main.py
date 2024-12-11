@@ -51,7 +51,7 @@ def main(config):
     elif config.mode == 'test':
         solver.test()
     
-    writer.close()
+    
 
     return solver
 
