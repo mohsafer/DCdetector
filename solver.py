@@ -64,11 +64,11 @@ class EarlyStopping:
         
 class Solver(object):
     DEFAULTS = {}
-
+    writer = SummaryWriter()
     def __init__(self, config):
 
         self.__dict__.update(Solver.DEFAULTS, **config)
-        writer = SummaryWriter()
+        
         self.train_loader = get_loader_segment(self.index, 'dataset/'+self.data_path, batch_size=self.batch_size, win_size=self.win_size, mode='train', dataset=self.dataset, )
         self.vali_loader = get_loader_segment(self.index, 'dataset/'+self.data_path, batch_size=self.batch_size, win_size=self.win_size, mode='val', dataset=self.dataset)
         self.test_loader = get_loader_segment(self.index, 'dataset/'+self.data_path, batch_size=self.batch_size, win_size=self.win_size, mode='test', dataset=self.dataset)
