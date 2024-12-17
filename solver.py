@@ -10,6 +10,7 @@ from model.DCdetector import DCdetector
 from data_factory.data_loader import get_loader_segment
 from einops import rearrange
 from metrics.metrics import *
+from sklearn.metrics import accuracy_score
 import warnings
 warnings.filterwarnings('ignore')
 
